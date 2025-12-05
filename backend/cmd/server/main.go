@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+	"path/filepath"
 	"yoi/internal/config"
 	"yoi/internal/handler"
 
@@ -19,6 +21,14 @@ func main() {
 	api := r.Group("/api")
 	{
 		api.GET("/health", handler.CheckHealth)
+	}
+
+	dist := filepath.Join("..", "frontend", "dist")
+	if _, err := os.Stat(dist); err == nil {
+		r.GET("/", func(ctx *gin.Context) {
+			ctx.File(filepath.Join(dist, "index.html"))
+		})
+		r.Static("/assets", filepath.Join(dist, "assets"))
 	}
 
 	r.Run(cfg.Addr + ":" + cfg.Port)
