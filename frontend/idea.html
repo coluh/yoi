@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>ideas</title>
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      #indicator {
+        position: absolute;
+        color: white;
+        font-weight: bold;
+        transition: opacity 0.1s;
+        pointer-events: none;
+      }
+      #indicatorText {
+        position: relative;
+        top: -2em;
+        left: -50%;
+      }
+      #markdownPanel {
+        position: absolute;
+        width: 70vw;
+        left: 15vw;
+        height: calc(100vh - 30vw);
+        top: 15vw;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        padding: 0.5em;
+        transition: opacity 0.2s;
+        border: 2px solid gray;
+        border-radius: 0.5em;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+      }
+      #markdownPanel img {
+        width: 100%;
+      }
+      .hidden {
+        opacity: 0;
+        visibility: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="indicator" class="hidden">
+      <span id="indicatorText"></span>
+    </div>
+    <div id="markdownPanel" class="hidden"></div>
+    <script type="module" src="/src/pages/idea/main.ts"></script>
+  </body>
+</html>

@@ -10,6 +10,7 @@ import (
 type Config struct {
 	Addr string
 	Port string
+	DistPath string
 	IdeasDir string
 }
 
@@ -20,8 +21,9 @@ func LoadConfig() *Config {
 	}
 
 	return &Config{
-		Addr: getEnv("ADDR", "localhost"),
+		Addr: getEnv("ADDR", "0.0.0.0"),
 		Port: getEnv("PORT", "8080"),
+		DistPath: getEnv("DIST_PATH", "../frontend/dist"),
 		IdeasDir: getEnv("IDEAS_DIR", ""),
 	}
 }

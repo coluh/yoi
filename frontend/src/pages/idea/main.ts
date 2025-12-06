@@ -1,14 +1,12 @@
 // import { getIdea, getIdeaList } from "./api/ideas";
-import "./style.css";
-
 import * as THREE from "three";
-import { CustomControls } from "./controls/CustomControls";
+import { CustomControls } from "./CustomControls";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
-import { randomGaussian, randomGaussianSingle } from "./utils/random";
-import type { IdeaList } from "./api/types";
-import { getIdea, getIdeaList } from "./api/ideas";
+import { randomGaussian, randomGaussianSingle } from "@/utils/random";
+import type { IdeaList } from "@/api/types";
+import { getIdea, getIdeaList } from "@/api/ideas";
 import { marked } from "marked";
 
 const renderer = new THREE.WebGLRenderer();

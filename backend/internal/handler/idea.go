@@ -24,7 +24,7 @@ func (h *IdeaHandler) RegisterRoutes(router *gin.Engine) {
 	{
 		group.GET("", h.GetIdeaList)
 		group.GET("/:title", h.GetIdea)
-		group.Static("/img", filepath.Join(h.ideasDir, "img"))
+		group.GET("/img/*filepath", h.GetIdeaImg)
 	}
 }
 
@@ -63,7 +63,7 @@ func (h *IdeaHandler) GetIdea(ctx *gin.Context) {
 }
 
 func (h *IdeaHandler) GetIdeaImg(ctx *gin.Context) {
-	imgname := ctx.Param("imgname")
-	path := filepath.Join(h.ideasDir, "img", imgname)
+	file := ctx.Param("filepath")
+	path := filepath.Join(h.ideasDir, "img", file)
 	ctx.File(path)
 }

@@ -3,6 +3,7 @@ package main
 import (
 	"os"
 	"path/filepath"
+	"strings"
 	"yoi/internal/config"
 	"yoi/internal/handler"
 
@@ -18,19 +19,23 @@ func main() {
 	r.Use(gin.Recovery())
 	// r.SetTrustedProxies([]string{"127.0.0.1"})
 
+	setupApiRoutes(r, cfg)
+	r.NoRoute(func(ctx *gin.Context) {
+		url := ctx.Request.URL.Path
+		path := filepath.Join(cfg.DistPath, strings.TrimPrefix(url, "/"))
+		if _, err := os.Stat(path); err != nil {
+			path = path + ".html"
+		}
+		ctx.File(path)
+	})
+
+	r.Run(cfg.Addr + ":" + cfg.Port)
+}
+
+func setupApiRoutes(r *gin.Engine, cfg *config.Config) {
 	handler.NewIdeaHandler(cfg.IdeasDir).RegisterRoutes(r)
 	api := r.Group("/api")
 	{
 		api.GET("/health", handler.CheckHealth)
 	}
-
-	dist := filepath.Join("..", "frontend", "dist")
-	if _, err := os.Stat(dist); err == nil {
-		r.GET("/", func(ctx *gin.Context) {
-			ctx.File(filepath.Join(dist, "index.html"))
-		})
-		r.Static("/assets", filepath.Join(dist, "assets"))
-	}
-
-	r.Run(cfg.Addr + ":" + cfg.Port)
 }
