@@ -18,6 +18,7 @@ func main() {
 	r.Use(gin.Recovery())
 	// r.SetTrustedProxies([]string{"127.0.0.1"})
 
+	handler.NewIdeaHandler(cfg.IdeasDir).RegisterRoutes(r)
 	api := r.Group("/api")
 	{
 		api.GET("/health", handler.CheckHealth)
