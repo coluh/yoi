@@ -28,9 +28,27 @@ composer.addPass(bloomPass);
 
 const controls = new CustomControls(camera, renderer.domElement);
 
-const indicator = document.getElementById("indicator")!;
-const indicatorText = document.getElementById("indicatorText")!;
-const markdownPanel = document.getElementById("markdownPanel")!;
+// 处理窗口 resize
+function onWindowResize() {
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+
+  // 更新 camera 的宽高比
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+
+  // 更新 renderer 尺寸
+  renderer.setSize(width, height);
+
+  // 更新 composer 尺寸
+  composer.setSize(width, height);
+}
+
+window.addEventListener("resize", onWindowResize);
+
+const indicator = document.querySelector("#indicator")! as HTMLDivElement;
+const indicatorText = document.querySelector("#indicatorText")! as HTMLSpanElement;
+const markdownPanel = document.querySelector("#markdownPanel")! as HTMLDivElement;
 
 const markedRenderer = new marked.Renderer();
 markedRenderer.image = ({ href, title, text }): string => {
@@ -187,6 +205,17 @@ const data = await getIdeaList();
 
 const ideaStars = new IdeaStars(data, renderer.domElement);
 scene.add(ideaStars.mesh);
+
+const welcomeDiv = document.querySelector("#welcome")! as HTMLDivElement;
+const welcomeText = document.querySelector("#welcomeText")! as HTMLSpanElement;
+welcomeText.textContent = `${data.titles.length}颗星星为你闪烁`;
+welcomeDiv.classList.remove("hidden");
+setTimeout(() => {
+  welcomeDiv.style.opacity = "0";
+}, 5000);
+setTimeout(() => {
+  welcomeDiv.classList.add("hidden");
+}, 7000);
 
 function animate() {
   controls.update();

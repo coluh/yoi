@@ -26,8 +26,8 @@
         position: absolute;
         width: 70vw;
         left: 15vw;
-        height: calc(100vh - 30vw);
-        top: 15vw;
+        height: 80vh;
+        top: 10vh;
         overflow-y: scroll;
         overflow-x: hidden;
         padding: 0.5em;
@@ -40,6 +40,19 @@
       #markdownPanel img {
         width: 100%;
       }
+      #welcome {
+        position: absolute;
+        width: 100%;
+        padding-top: 10vh;
+        transition: opacity 2s;
+      }
+      #welcomeText {
+        font-size: xx-large;
+        color: white;
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+      }
       .hidden {
         opacity: 0;
         visibility: hidden;
@@ -51,6 +64,9 @@
       <span id="indicatorText"></span>
     </div>
     <div id="markdownPanel" class="hidden"></div>
+    <div id="welcome" class="hidden">
+      <span id="welcomeText"></span>
+    </div>
     <script type="module" src="/src/pages/idea/main.ts"></script>
   </body>
 </html>
