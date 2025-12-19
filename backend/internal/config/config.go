@@ -21,10 +21,10 @@ func LoadConfig() *Config {
 	}
 
 	return &Config{
-		Addr: getEnv("ADDR", "0.0.0.0"),
-		Port: getEnv("PORT", "8080"),
+		Addr: getEnv("ADDR", "localhost"),
+		Port: getEnv("PORT", "3200"),
 		DistPath: getEnv("DIST_PATH", "../frontend/dist"),
-		IdeasDir: getEnv("IDEAS_DIR", ""),
+		IdeasDir: getEnv("IDEAS_DIR", "/home/coluh/wt/vaults/Stars"),
 	}
 }
 
