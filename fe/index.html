@@ -1,15 +1,51 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>bw</title>
+    <link rel="stylesheet" href="/src/assets/styles/base.css" />
+    <title>Home</title>
+    <style>
+      header {
+        margin-bottom: 50px;
+      }
+      header .avatar {
+        border: 2px solid var(--color-text-inverse);
+        margin-top: 80px;
+      }
+      header .intro {
+        transform: translate(0, 1.8em);
+      }
+      header .intro h1 {
+        margin-bottom: 0.2em;
+      }
+    </style>
   </head>
   <body>
-    <h4>hello</h4>
-    <ul>
-      <li><a href="./idea">idea</a></li>
-    </ul>
+    <header>
+      <img src="/src/assets/images/avatar.svg" alt="avatar" width="100px" height="100px" class="avatar" />
+      <div class="intro">
+        <h1>Destywen</h1>
+        <p><i>欢迎来到我的世界</i></p>
+      </div>
+      <div class="dark-toggle">
+        <img src="/src/assets/icons/moon.svg" alt="dark mode toggle" width="32px" height="32px" />
+      </div>
+    </header>
+
+    <div style="padding: 20px">
+      <button>按钮</button>
+      <a href="about:blank">链接</a>
+    </div>
+
+    <div style="padding: 20px; width: 300px">
+      <ul>
+        <li>看看星图：<a href="./idea">idea</a></li>
+        <li>其他页面...</li>
+      </ul>
+    </div>
+
+    <script src="/src/utils/dark.ts"></script>
   </body>
 </html>
