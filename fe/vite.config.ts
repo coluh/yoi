@@ -12,6 +12,9 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": "/src",
+      "@assets": "/src/assets",
+      "@styles": "/src/styles",
+      "@utils": "/src/utils",
     },
   },
   server: {

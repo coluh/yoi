@@ -25,7 +25,7 @@ func LoadConfig() *Config {
 
 	return &Config{
 		Addr:     getEnv("ADDR", "localhost"),
-		Port:     getEnv("PORT", "3200"),
+		Port:     getEnv("PORT", "80"),
 		DistPath: getEnv("DIST_PATH", ""),
 		IdeasDir: getEnv("IDEAS_DIR", ""),
 	}

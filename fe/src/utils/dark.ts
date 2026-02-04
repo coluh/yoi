@@ -1,6 +1,7 @@
-import sunUrl from "@/assets/icons/sun.svg";
-import moonUrl from "@/assets/icons/moon.svg";
+import sunUrl from "@assets/sun.svg";
+import moonUrl from "@assets/moon.svg";
 
+// Dark mode toggle
 document.querySelectorAll<HTMLImageElement>(".dark-toggle img").forEach((icon) => {
   icon.addEventListener("click", () => {
     document.documentElement.classList.toggle("dark-mode");
@@ -13,6 +14,8 @@ document.querySelectorAll<HTMLImageElement>(".dark-toggle img").forEach((icon) =
     }
   });
 });
+
+// Listen to system dark mode changes
 window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
   const icon = document.querySelector<HTMLImageElement>(".dark-toggle img");
   if (e.matches) {
@@ -29,6 +32,8 @@ window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e)
     }
   }
 });
+
+// Initialize based on system preference
 if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
   document.documentElement.classList.add("dark-mode");
   const icon = document.querySelector<HTMLImageElement>(".dark-toggle img");
