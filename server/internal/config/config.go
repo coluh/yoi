@@ -8,23 +8,26 @@ import (
 )
 
 type Config struct {
-	Addr string
-	Port string
+	Addr     string
+	Port     string
 	DistPath string
 	IdeasDir string
 }
 
 func LoadConfig() *Config {
-	err := godotenv.Load(".env")
-	if err != nil {
-		log.Println("Failed to load .env file:", err.Error())
+	if err := godotenv.Load(".env.local"); err == nil {
+		log.Println("Loaded .env.local file")
+	} else if err := godotenv.Load(".env"); err == nil {
+		log.Println("Loaded .env file")
+	} else {
+		log.Println("No .env.local or .env file found")
 	}
 
 	return &Config{
-		Addr: getEnv("ADDR", "localhost"),
-		Port: getEnv("PORT", "3200"),
-		DistPath: getEnv("DIST_PATH", "../frontend/dist"),
-		IdeasDir: getEnv("IDEAS_DIR", "/home/coluh/wt/vaults/Stars"),
+		Addr:     getEnv("ADDR", "localhost"),
+		Port:     getEnv("PORT", "3200"),
+		DistPath: getEnv("DIST_PATH", ""),
+		IdeasDir: getEnv("IDEAS_DIR", ""),
 	}
 }
 
