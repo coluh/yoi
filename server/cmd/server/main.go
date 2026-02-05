@@ -22,7 +22,12 @@ func main() {
 	setupApiRoutes(r, cfg)
 	r.NoRoute(func(ctx *gin.Context) {
 		url := ctx.Request.URL.Path
-		path := filepath.Join(cfg.DistPath, strings.TrimPrefix(url, "/"))
+		url = strings.TrimPrefix(url, "/")
+		if url == "" || url == "home" {
+			url = "index"
+		}
+
+		path := filepath.Join(cfg.DistPath, url)
 		if _, err := os.Stat(path); err != nil {
 			path = path + ".html"
 		}
