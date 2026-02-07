@@ -6,8 +6,10 @@ import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
 import { randomGaussian, randomGaussianSingle } from "@/utils/random";
 import type { IdeaList } from "@/api/types";
-import { getIdea, getIdeaList } from "@/api/ideas";
+import { getIdea, getIdeaList } from "@/api/files";
 import { marked } from "marked";
+
+import "@styles/idea.css";
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);

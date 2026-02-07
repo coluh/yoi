@@ -4,50 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/y.svg" />
-    <link rel="stylesheet" href="/src/styles/default.css" />
     <title>Home</title>
-    <style>
-      header {
-        height: 5rem;
-        background-color: var(--color-primary);
-        color: var(--color-text);
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: var(--space-md);
-        padding: 0 var(--space-lg);
-        margin-bottom: 3rem;
-      }
-      header .avatar {
-        width: 6rem;
-        height: 6rem;
-        border: 2px solid var(--color-text-inverse);
-        margin-top: 5rem;
-      }
-      header .intro {
-        margin-bottom: calc(0px - var(--space-lg) - 1rem - var(--space-sm) * 2);
-        display: flex;
-        flex-direction: column;
-        gap: var(--space-sm);
-      }
-
-      @media (width < 48rem) {
-        header {
-          height: auto;
-          padding: var(--space-sm);
-          gap: var(--space-md);
-        }
-        header .avatar {
-          width: 4rem;
-          height: 4rem;
-          margin-top: 0;
-        }
-        header .intro {
-          margin-bottom: 0rem;
-          gap: 0;
-        }
-      }
-    </style>
   </head>
   <body>
     <header>
@@ -57,22 +14,18 @@
         <p><i>欢迎来到我的世界</i></p>
       </div>
       <div class="dark-toggle">
-        <img src="/src/assets/moon.svg" alt="dark mode toggle" width="32px" height="32px" />
+        <img src="/src/assets/moon.svg" alt="dark mode" class="icon" />
       </div>
     </header>
 
-    <div style="padding: 20px">
-      <button>按钮</button>
-      <a href="about:blank">链接</a>
-    </div>
-
-    <div style="padding: 20px; width: 300px">
+    <div class="list">
       <ul>
-        <li onclick="window.location.href = './idea'">看看星图：<a href="./idea">idea</a></li>
-        <li>其他页面...</li>
+        <li onclick="window.location.href = '/idea'">看看星图</li>
+        <li onclick="window.location.href = '/article'">文章</li>
+        <li onclick="window.location.href = '/notfound'">其他页面...</li>
       </ul>
     </div>
 
-    <script type="module" src="/src/utils/dark.ts"></script>
+    <script type="module" src="/src/pages/home/main.ts"></script>
   </body>
 </html>
