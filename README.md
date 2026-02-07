@@ -3,7 +3,7 @@
 
 ```shell
 /
-├── index
-└── ideas
+├── home
+└── idea
 ```
 

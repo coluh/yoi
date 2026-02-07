@@ -31,7 +31,7 @@ func (h *IdeaHandler) RegisterRoutes(router *gin.Engine) {
 func (h *IdeaHandler) GetIdeaList(ctx *gin.Context) {
 	entry, err := os.ReadDir(h.ideasDir)
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "unable to read ideas dir: " + err.Error()})
+		ctx.JSON(http.StatusNotFound, gin.H{"error": "unable to read ideas dir: " + err.Error()})
 		return
 	}
 
@@ -55,7 +55,7 @@ func (h *IdeaHandler) GetIdea(ctx *gin.Context) {
 	path := filepath.Join(h.ideasDir, filename)
 	data, err := os.ReadFile(path)
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{"error": "unable to read file: " + err.Error()})
+		ctx.JSON(http.StatusNotFound, gin.H{"error": "unable to read file: " + err.Error()})
 		return
 	}
 
