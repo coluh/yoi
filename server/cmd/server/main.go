@@ -39,6 +39,7 @@ func main() {
 
 func setupApiRoutes(r *gin.Engine, cfg *config.Config) {
 	handler.NewIdeaHandler(cfg.IdeasDir).RegisterRoutes(r)
+	handler.NewArticleHandler(cfg.ArticlesDirs).RegisterRoutes(r)
 	api := r.Group("/api")
 	{
 		api.GET("/health", handler.CheckHealth)

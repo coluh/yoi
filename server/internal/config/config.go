@@ -8,10 +8,11 @@ import (
 )
 
 type Config struct {
-	Addr     string
-	Port     string
-	DistPath string
-	IdeasDir string
+	Addr         string
+	Port         string
+	DistPath     string
+	IdeasDir     string
+	ArticlesDirs string
 }
 
 func LoadConfig() *Config {
@@ -24,10 +25,11 @@ func LoadConfig() *Config {
 	}
 
 	return &Config{
-		Addr:     getEnv("ADDR", "localhost"),
-		Port:     getEnv("PORT", "8080"),
-		DistPath: getEnv("DIST_PATH", "dist"),
-		IdeasDir: getEnv("IDEAS_DIR", ""),
+		Addr:         getEnv("ADDR", "localhost"),
+		Port:         getEnv("PORT", "8080"),
+		DistPath:     getEnv("DIST_PATH", "dist"),
+		IdeasDir:     getEnv("IDEAS_DIR", ""),
+		ArticlesDirs: getEnv("ARTICLES_DIRS", ""),
 	}
 }
 
