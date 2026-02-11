@@ -13,6 +13,7 @@ header {
 header .avatar {
   height: 3rem;
   margin-left: 0.5rem;
+  border: solid 2px var(--color-text-inverse);
 }
 
 header .title {
