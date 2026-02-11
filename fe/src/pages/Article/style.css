@@ -1,10 +1,5 @@
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .article-list {
+  margin: 0 auto;
   background-color: var(--color-bg-secondary);
   width: 48rem;
   border: solid 2px var(--color-bg-hover);
@@ -25,6 +20,9 @@ main {
   box-shadow: 0 0 var(--space-sm) var(--color-accent);
 }
 
+main article {
+  margin: 0 auto;
+}
 article {
   max-width: 48rem;
   background-color: var(--color-bg-secondary);

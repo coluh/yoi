@@ -1,11 +1,19 @@
 import { Marked } from "marked";
 import { markedHighlight } from "marked-highlight";
-import hljs from "highlight.js";
+import hljs from "highlight.js/lib/core";
+import bash from "highlight.js/lib/languages/bash";
+import json from "highlight.js/lib/languages/json";
+import kotlin from "highlight.js/lib/languages/kotlin";
 import { useEffect, useRef } from "preact/hooks";
 import "./markdown.css";
 
 // import "highlight.js/styles/github.css";
 import "highlight.js/styles/github-dark.css";
+
+hljs.registerLanguage("bash", bash);
+hljs.registerLanguage("sh", bash);
+hljs.registerLanguage("json", json);
+hljs.registerLanguage("kotlin", kotlin);
 
 const marked = new Marked(
   markedHighlight({
