@@ -1,6 +1,8 @@
 package handler
 
 import (
+	"crypto/md5"
+	"encoding/hex"
 	"io/fs"
 	"net/http"
 	"os"
@@ -9,7 +11,6 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
-	"github.com/google/uuid"
 )
 
 type Article struct {
@@ -38,7 +39,13 @@ func (h *ArticleHandler) RegisterRoutes(r *gin.Engine) {
 	{
 		g.GET("", h.GetArticleList)
 		g.GET("/:id", h.GetArticle)
+		g.GET("/:id/*filepath", h.GetArticleImage)
 	}
+}
+
+func generateID(path string) string {
+	h := md5.Sum([]byte(path))
+	return hex.EncodeToString(h[:])[:16]
 }
 
 // TODO: cache?
@@ -54,13 +61,11 @@ func (h *ArticleHandler) scanArticles() {
 
 			if !d.IsDir() && (filepath.Ext(d.Name()) == ".md") {
 				// this is an article
-				dir := filepath.Dir(path)
-				base := filepath.Base(path)
-				name := strings.TrimSuffix(base, ".md")
+				rel, _ := filepath.Rel(v, path)
 				h.articleList = append(h.articleList, Article{
-					dir:  dir,
-					name: name,
-					id:   uuid.NewString(),
+					dir:  filepath.Dir(path),
+					name: strings.TrimSuffix(d.Name(), ".md"),
+					id:   generateID(rel),
 				})
 			}
 
@@ -109,9 +114,9 @@ func (h *ArticleHandler) GetArticleList(ctx *gin.Context) {
 		title, summary := getArticleInfo(content)
 		info, _ := os.Stat(path)
 		articles = append(articles, GetArticleResp{
-			Name:     v.id,
+			Id:     v.id,
 			Title:    title,
-			UpdateAt: info.ModTime(),
+			UpdatedAt: info.ModTime(),
 			Summary:  summary,
 		})
 	}
@@ -145,11 +150,38 @@ func (h *ArticleHandler) GetArticle(ctx *gin.Context) {
 			title, _ := getArticleInfo(content)
 			info, _ := os.Stat(path)
 			ctx.JSON(200, GetArticleResp{
-				Name:     v.name,
+				Id:     v.id,
 				Title:    title,
 				Content:  content,
-				UpdateAt: info.ModTime(),
+				UpdatedAt: info.ModTime(),
 			})
+			return
+		}
+	}
+
+	fail(ctx, 404, "no such article")
+}
+
+func (h *ArticleHandler) GetArticleImage(ctx *gin.Context) {
+	if h.articleList == nil {
+		h.scanArticles()
+	}
+
+	id := ctx.Param("id")
+	filePath := ctx.Param("filepath")
+	if strings.Contains(filePath, "..") {
+		fail(ctx, 403, "url contains illegal path")
+		return
+	}
+
+	for _, v := range h.articleList {
+		if id == v.id {
+			path := filepath.Join(v.dir, filePath)
+			if _, err := os.Stat(path); err != nil {
+				fail(ctx, 404, "no such file")
+				return
+			}
+			ctx.File(path)
 			return
 		}
 	}

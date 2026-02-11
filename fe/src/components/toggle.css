@@ -1,0 +1,31 @@
+button.toggle {
+  padding: 0;
+}
+button.toggle:hover {
+  box-shadow: none;
+}
+.toggle-track {
+  background-color: var(--color-bg-secondary);
+  width: 4rem;
+  height: 2rem;
+  border-radius: 1rem;
+}
+.toggle-track:hover {
+  box-shadow: 0 0 var(--space-sm) var(--color-accent);
+}
+.toggle-thumb {
+  background-color: var(--color-primary);
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  border: solid 2px var(--color-bg-secondary);
+  transition:
+    transform 0.3s ease,
+    var(--transition-color);
+}
+.toggle-active .toggle-thumb {
+  transform: translateX(2rem);
+}
+.toggle-inactive .toggle-thumb {
+  transform: translateX(0);
+}

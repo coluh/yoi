@@ -5,10 +5,10 @@ import "time"
 // fe/src/api/types.ts
 
 type GetArticleResp struct {
-	Name     string    `json:"id"`
+	Id     string    `json:"id"`
 	Title    string    `json:"title"`
 	Content  string    `json:"content"`
-	UpdateAt time.Time `json:"updateAt"`
+	UpdatedAt time.Time `json:"updatedAt"`
 	Summary  string    `json:"summary"`
 }
 

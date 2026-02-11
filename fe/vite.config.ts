@@ -1,28 +1,12 @@
 import { defineConfig } from "vite";
+import preact from "@preact/preset-vite";
 
+// https://vitejs.dev/config/
 export default defineConfig({
-  build: {
-    rollupOptions: {
-      input: {
-        home: "/index.html",
-        idea: "/idea.html",
-      },
-    },
-  },
-  resolve: {
-    alias: {
-      "@": "/src",
-      "@assets": "/src/assets",
-      "@styles": "/src/styles",
-      "@utils": "/src/utils",
-    },
-  },
+  plugins: [preact()],
   server: {
     proxy: {
-      "/api": {
-        target: "http://localhost:3200",
-        changeOrigin: true,
-      },
+      "/api": "http://localhost:3200",
     },
   },
 });

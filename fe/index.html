@@ -1,31 +1,14 @@
 <!doctype html>
-<html lang="zh">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/y.svg" />
-    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Yoi</title>
   </head>
   <body>
-    <header>
-      <img src="/src/assets/avatar.svg" alt="avatar" class="avatar" />
-      <div class="intro">
-        <h2>Destywen</h2>
-        <p><i>欢迎来到我的世界</i></p>
-      </div>
-      <div class="dark-toggle">
-        <img src="/src/assets/moon.svg" alt="dark mode" class="icon" />
-      </div>
-    </header>
-
-    <div class="list">
-      <ul>
-        <li onclick="window.location.href = '/idea'">看看星图</li>
-        <li onclick="window.location.href = '/article'">文章</li>
-        <li onclick="window.location.href = '/notfound'">其他页面...</li>
-      </ul>
-    </div>
-
-    <script type="module" src="/src/pages/home/main.ts"></script>
+    <div id="app"></div>
+    <script type="module" src="/src/index.tsx"></script>
   </body>
 </html>
